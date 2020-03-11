@@ -73,7 +73,7 @@ func ResyncCommitStatus(ctx context.Context, db gorp.SqlExecutor, store cache.St
 		//Get the RepositoriesManager Client
 		client, errClient := repositoriesmanager.AuthorizedClient(ctx, db, store, proj.Key, vcsServer)
 		if errClient != nil {
-			return sdk.WrapError(errClient, "resyncCommitStatus> Cannot get client %s", details)
+			return sdk.WrapError(errClient, "cannot get client %s", details)
 		}
 
 		ref := nodeRun.VCSHash
@@ -83,7 +83,7 @@ func ResyncCommitStatus(ctx context.Context, db gorp.SqlExecutor, store cache.St
 
 		statuses, errStatuses := client.ListStatuses(ctx, repoFullName, ref)
 		if errStatuses != nil {
-			return sdk.WrapError(errStatuses, "resyncCommitStatus> Cannot get statuses %s", details)
+			return sdk.WrapError(errStatuses, "cannot get statuses %s", details)
 		}
 
 		var statusFound *sdk.VCSCommitStatus
